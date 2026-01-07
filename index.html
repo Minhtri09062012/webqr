@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Tree Library</title>
+<title>Thư viện cây xanh thông minh</title>
 
 <style>
 body{
@@ -74,66 +74,66 @@ h3{margin-top:14px}
 <body>
 
 <header>
-  <h2>🌿 SMART TREE LIBRARY</h2>
-  <p>Scan a QR code on a tree to view scientific information instantly</p>
+  <h2>🌿 THƯ VIỆN CÂY XANH THÔNG MINH</h2>
+  <p>Quét mã QR trên cây để xem thông tin khoa học ngay lập tức</p>
 </header>
 
 <div id="layout">
 
 <aside>
-  <input id="search" placeholder="Search tree...">
+  <input id="search" placeholder="Tìm kiếm cây...">
   <div id="list"></div>
 </aside>
 
 <main id="info">
-  <p>Select a tree or scan a QR code</p>
+  <p>Chọn một cây hoặc quét mã QR</p>
 </main>
 
 </div>
 
 <script>
-/* ===== TREE DATABASE (SCIENTIFIC) ===== */
+/* ===== CƠ SỞ DỮ LIỆU CÂY ===== */
 const trees = [
 {
   id:1,
-  name:"Royal Poinciana",
+  name:"Phượng vĩ",
   scientific:"Delonix regia",
-  family:"Fabaceae",
+  family:"Họ Đậu (Fabaceae)",
   origin:"Madagascar",
   year:2019,
   height:"10–15 m",
-  leaf:"Bipinnate leaves",
-  flowering:"May – July",
-  ecology:"Provides shade, improves microclimate, reduces heat",
-  note:"Large ornamental shade tree with bright red flowers, commonly planted in school campuses.",
-  image:"https://i.imgur.com/5JqY1B2.jpg"
+  leaf:"Lá kép lông chim",
+  flowering:"Tháng 5 – Tháng 7",
+  ecology:"Tạo bóng mát, cải thiện vi khí hậu, giảm nhiệt",
+  note:"Cây bóng mát lớn với hoa đỏ rực, thường được trồng trong khuôn viên trường học.",
+  image:"https://upload.wikimedia.org/wikipedia/commons/8/87/Royal_Poinciana.jpg"
 },
 {
   id:2,
-  name:"Golden Shower Tree",
+  name:"Muồng hoàng yến",
   scientific:"Cassia fistula",
-  family:"Fabaceae",
-  origin:"South Asia",
+  family:"Họ Đậu (Fabaceae)",
+  origin:"Nam Á",
   year:2020,
   height:"8–12 m",
-  leaf:"Compound leaves",
-  flowering:"April – June",
-  ecology:"Attracts pollinators, decorative landscape tree",
-  note:"Famous for its long clusters of bright yellow flowers.",
+  leaf:"Lá kép",
+  flowering:"Tháng 4 – Tháng 6",
+  ecology:"Thu hút côn trùng thụ phấn, cây cảnh quan",
+  note:"Nổi bật với các chùm hoa vàng dài rực rỡ.",
   image:"https://i.imgur.com/Cl9Z0nU.jpg"
 },
 {
   id:3,
-  name:"Chinese Banyan",
+  name:"Cây sanh (cắt tỉa)",
   scientific:"Ficus microcarpa",
-  family:"Moraceae",
-  origin:"Southeast Asia",
+  family:"Họ Dâu tằm (Moraceae)",
+  origin:"Đông Nam Á",
   year:2021,
   height:"6–10 m",
-  leaf:"Evergreen simple leaves",
-  flowering:"Rarely visible",
-  ecology:"Air purification, dust reduction, urban cooling",
-  note:"Often pruned into decorative forms for landscaping.",
+  leaf:"Lá đơn xanh quanh năm",
+  flowering:"Ít thấy",
+  ecology:"Lọc không khí, giảm bụi, làm mát môi trường",
+  note:"Thường được cắt tỉa tạo hình để trang trí cảnh quan.",
   image:"https://i.imgur.com/Z6H5Z5F.jpg"
 }
 ];
@@ -142,7 +142,7 @@ const listDiv = document.getElementById("list");
 const info = document.getElementById("info");
 const search = document.getElementById("search");
 
-/* ===== DISPLAY TREE INFO ===== */
+/* ===== HIỂN THỊ THÔNG TIN CÂY ===== */
 function showInfo(tree){
   document.querySelectorAll(".tree").forEach(b=>b.classList.remove("active"));
   const btn=document.querySelector(`[data-id="${tree.id}"]`);
@@ -152,23 +152,23 @@ function showInfo(tree){
     <img src="${tree.image}">
     <h2>${tree.name}</h2>
 
-    <div class="badge">🌱 ${tree.scientific}</div>
-    <div class="badge">🧬 Family: ${tree.family}</div>
-    <div class="badge">🌍 Origin: ${tree.origin}</div>
-    <div class="badge">📏 Height: ${tree.height}</div>
-    <div class="badge">🍃 Leaf: ${tree.leaf}</div>
-    <div class="badge">🌼 Flowering: ${tree.flowering}</div>
-    <div class="badge">📅 Planted: ${tree.year}</div>
+    <div class="badge">🌱 Tên khoa học: ${tree.scientific}</div>
+    <div class="badge">🧬 Họ: ${tree.family}</div>
+    <div class="badge">🌍 Nguồn gốc: ${tree.origin}</div>
+    <div class="badge">📏 Chiều cao: ${tree.height}</div>
+    <div class="badge">🍃 Lá: ${tree.leaf}</div>
+    <div class="badge">🌼 Mùa hoa: ${tree.flowering}</div>
+    <div class="badge">📅 Năm trồng: ${tree.year}</div>
 
-    <h3>🌳 Ecological Value</h3>
+    <h3>🌳 Giá trị sinh thái</h3>
     <p>${tree.ecology}</p>
 
-    <h3>📝 Description</h3>
+    <h3>📝 Mô tả</h3>
     <p>${tree.note}</p>
   `;
 }
 
-/* ===== RENDER TREE LIST ===== */
+/* ===== DANH SÁCH CÂY ===== */
 function render(data){
   listDiv.innerHTML="";
   data.forEach(t=>{
@@ -182,13 +182,13 @@ function render(data){
 }
 render(trees);
 
-/* ===== SEARCH ===== */
+/* ===== TÌM KIẾM ===== */
 search.oninput=()=>{
   const q=search.value.toLowerCase();
   render(trees.filter(t=>t.name.toLowerCase().includes(q)));
 };
 
-/* ===== AUTO OPEN TREE FROM QR LINK ===== */
+/* ===== TỰ ĐỘNG MỞ CÂY KHI QUÉT QR ===== */
 const params = new URLSearchParams(window.location.search);
 const treeId = params.get("tree");
 
