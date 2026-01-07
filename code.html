@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Tree Library</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f0fff4;
+}
+header{
+  background:#2f855a;
+  color:white;
+  padding:16px;
+  text-align:center;
+}
+#layout{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:16px;
+  padding:16px;
+}
+aside, main{
+  background:white;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 6px 15px rgba(0,0,0,.1);
+}
+input{
+  width:100%;
+  padding:8px;
+  margin-bottom:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+button.tree{
+  width:100%;
+  padding:8px;
+  border:none;
+  border-radius:10px;
+  margin-bottom:6px;
+  cursor:pointer;
+  background:#e6fffa;
+}
+button.tree:hover,
+button.tree.active{
+  background:#38a169;
+  color:white;
+}
+img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+.badge{
+  display:inline-block;
+  background:#e6fffa;
+  color:#065f46;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  margin:4px 6px 4px 0;
+}
+h3{margin-top:14px}
+@media(max-width:768px){
+  #layout{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🌿 SMART TREE LIBRARY</h2>
+  <p>Scan a QR code on a tree to view scientific information instantly</p>
+</header>
+
+<div id="layout">
+
+<aside>
+  <input id="search" placeholder="Search tree...">
+  <div id="list"></div>
+</aside>
+
+<main id="info">
+  <p>Select a tree or scan a QR code</p>
+</main>
+
+</div>
+
+<script>
+/* ===== TREE DATABASE (SCIENTIFIC) ===== */
+const trees = [
+{
+  id:1,
+  name:"Royal Poinciana",
+  scientific:"Delonix regia",
+  family:"Fabaceae",
+  origin:"Madagascar",
+  year:2019,
+  height:"10–15 m",
+  leaf:"Bipinnate leaves",
+  flowering:"May – July",
+  ecology:"Provides shade, improves microclimate, reduces heat",
+  note:"Large ornamental shade tree with bright red flowers, commonly planted in school campuses.",
+  image:"https://i.imgur.com/5JqY1B2.jpg"
+},
+{
+  id:2,
+  name:"Golden Shower Tree",
+  scientific:"Cassia fistula",
+  family:"Fabaceae",
+  origin:"South Asia",
+  year:2020,
+  height:"8–12 m",
+  leaf:"Compound leaves",
+  flowering:"April – June",
+  ecology:"Attracts pollinators, decorative landscape tree",
+  note:"Famous for its long clusters of bright yellow flowers.",
+  image:"https://i.imgur.com/Cl9Z0nU.jpg"
+},
+{
+  id:3,
+  name:"Chinese Banyan",
+  scientific:"Ficus microcarpa",
+  family:"Moraceae",
+  origin:"Southeast Asia",
+  year:2021,
+  height:"6–10 m",
+  leaf:"Evergreen simple leaves",
+  flowering:"Rarely visible",
+  ecology:"Air purification, dust reduction, urban cooling",
+  note:"Often pruned into decorative forms for landscaping.",
+  image:"https://i.imgur.com/Z6H5Z5F.jpg"
+}
+];
+
+const listDiv = document.getElementById("list");
+const info = document.getElementById("info");
+const search = document.getElementById("search");
+
+/* ===== DISPLAY TREE INFO ===== */
+function showInfo(tree){
+  document.querySelectorAll(".tree").forEach(b=>b.classList.remove("active"));
+  const btn=document.querySelector(`[data-id="${tree.id}"]`);
+  if(btn) btn.classList.add("active");
+
+  info.innerHTML = `
+    <img src="${tree.image}">
+    <h2>${tree.name}</h2>
+
+    <div class="badge">🌱 ${tree.scientific}</div>
+    <div class="badge">🧬 Family: ${tree.family}</div>
+    <div class="badge">🌍 Origin: ${tree.origin}</div>
+    <div class="badge">📏 Height: ${tree.height}</div>
+    <div class="badge">🍃 Leaf: ${tree.leaf}</div>
+    <div class="badge">🌼 Flowering: ${tree.flowering}</div>
+    <div class="badge">📅 Planted: ${tree.year}</div>
+
+    <h3>🌳 Ecological Value</h3>
+    <p>${tree.ecology}</p>
+
+    <h3>📝 Description</h3>
+    <p>${tree.note}</p>
+  `;
+}
+
+/* ===== RENDER TREE LIST ===== */
+function render(data){
+  listDiv.innerHTML="";
+  data.forEach(t=>{
+    const b=document.createElement("button");
+    b.className="tree";
+    b.dataset.id=t.id;
+    b.textContent=t.name;
+    b.onclick=()=>showInfo(t);
+    listDiv.appendChild(b);
+  });
+}
+render(trees);
+
+/* ===== SEARCH ===== */
+search.oninput=()=>{
+  const q=search.value.toLowerCase();
+  render(trees.filter(t=>t.name.toLowerCase().includes(q)));
+};
+
+/* ===== AUTO OPEN TREE FROM QR LINK ===== */
+const params = new URLSearchParams(window.location.search);
+const treeId = params.get("tree");
+
+if(treeId){
+  const tree = trees.find(t=>t.id==treeId);
+  if(tree){
+    showInfo(tree);
+    info.scrollIntoView({behavior:"smooth"});
+  }
+}
+</script>
+
+</body>
+</html>
