@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thư viện cây xanh thông minh</title>
+<title>🌿 Thư viện cây xanh thông minh</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Segoe UI, Arial, sans-serif;
   background:#f0fff4;
 }
 header{
-  background:#2f855a;
+  background:linear-gradient(90deg,#2f855a,#38a169);
   color:white;
-  padding:16px;
+  padding:18px;
   text-align:center;
 }
 #layout{
@@ -31,19 +31,20 @@ aside, main{
 }
 input{
   width:100%;
-  padding:8px;
+  padding:10px;
   margin-bottom:10px;
   border-radius:10px;
   border:1px solid #ccc;
 }
 button.tree{
   width:100%;
-  padding:8px;
+  padding:10px;
   border:none;
   border-radius:10px;
   margin-bottom:6px;
   cursor:pointer;
-  background:#e6fffa;
+  background:#ecfeff;
+  text-align:left;
 }
 button.tree:hover,
 button.tree.active{
@@ -57,14 +58,19 @@ img{
 }
 .badge{
   display:inline-block;
-  background:#e6fffa;
-  color:#065f46;
   padding:6px 12px;
-  border-radius:20px;
+  border-radius:14px;
   font-size:13px;
-  margin:4px 6px 4px 0;
+  margin:4px;
+  background:#ecfdf5;
+  color:#047857;
 }
-h3{margin-top:14px}
+h3{
+  margin-top:16px;
+  border-left:5px solid #38a169;
+  padding-left:8px;
+  color:#065f46;
+}
 @media(max-width:768px){
   #layout{grid-template-columns:1fr}
 }
@@ -75,162 +81,233 @@ h3{margin-top:14px}
 
 <header>
   <h2>🌿 THƯ VIỆN CÂY XANH THÔNG MINH</h2>
-  <p>Quét mã QR trên cây để xem thông tin khoa học ngay lập tức</p>
+  <p>Mỗi cây – Một tri thức khoa học – Một thông điệp sống xanh</p>
 </header>
 
 <div id="layout">
-
-<aside>
-  <input id="search" placeholder="Tìm kiếm cây...">
-  <div id="list"></div>
-</aside>
-
-<main id="info">
-  <p>Chọn một cây hoặc quét mã QR</p>
-</main>
-
+  <aside>
+    <input id="search" placeholder="🔍 Tìm kiếm cây...">
+    <div id="list"></div>
+  </aside>
+  <main id="info">
+    <p>🌱 Chọn một cây để xem thông tin chi tiết.</p>
+  </main>
 </div>
 
 <script>
-/* ===== CƠ SỞ DỮ LIỆU CÂY ===== */
 const trees = [
 {
   id:1,
-  name:"Phượng vĩ",
-  scientific:"Delonix regia",
-  family:"Họ Đậu (Fabaceae)",
-  origin:"Madagascar",
-  year:2019,
-  height:"10–15 m",
-  leaf:"Lá kép lông chim",
-  flowering:"Tháng 5 – Tháng 7",
-  ecology:"Tạo bóng mát, cải thiện vi khí hậu, giảm nhiệt",
-  note:"Cây bóng mát lớn với hoa đỏ rực, thường được trồng trong khuôn viên trường học.",
-  image:"https://upload.wikimedia.org/wikipedia/commons/8/87/Royal_Poinciana.jpg"
+  name:"Cây lan ý",
+  scientific:"Spathiphyllum wallisii",
+  family:"Araceae",
+  origin:"Trung & Nam Mỹ",
+  year:2023,
+  height:"30–60 cm",
+  leaf:"Lá xanh đậm, bóng",
+  flowering:"Quanh năm",
+  ecology:"Lọc không khí, trang trí nội thất.",
+  note:"Biểu tượng của sự bình yên và hài hòa.",
+  image:"file:///C:/Users/Admin/Pictures/z7409301869028_d5f74c9d031f3ec7b40a468cdde39f73.jpg",
+  message:"🤍 Bình yên bắt đầu từ những điều giản dị."
 },
 {
   id:2,
-  name:"Muồng hoàng yến",
-  scientific:"Cassia fistula",
-  family:"Họ Đậu (Fabaceae)",
-  origin:"Nam Á",
-  year:2020,
-  height:"8–12 m",
-  leaf:"Lá kép",
-  flowering:"Tháng 4 – Tháng 6",
-  ecology:"Thu hút côn trùng thụ phấn, cây cảnh quan",
-  note:"Nổi bật với các chùm hoa vàng dài rực rỡ.",
-  image:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Cassia_fistula_-_Kolkata_2011-04-29_2362.JPG"
+  name:"Cây đuôi công đốm",
+  scientific:"Calathea makoyana",
+  family:"Marantaceae",
+  origin:"Nam Mỹ",
+  year:2023,
+  height:"30–70 cm",
+  leaf:"Lá lớn có hoa văn như đuôi công",
+  flowering:"Ít hoa",
+  ecology:"Cây cảnh nội thất, tăng tính thẩm mỹ.",
+  note:"Vẻ đẹp đến từ họa tiết tự nhiên.",
+  image:"file:///C:/Users/Admin/Pictures/z7409301897086_e6c2de44eaa73c76c1be93d165f42c5c.jpg",
+  message:"🦚 Tinh tế tạo nên sự khác biệt."
 },
 {
   id:3,
-  name:"Cây sanh (cắt tỉa)",
-  scientific:"Ficus microcarpa",
-  family:"Họ Dâu tằm (Moraceae)",
-  origin:"Đông Nam Á",
-  year:2021,
-  height:"6–10 m",
-  leaf:"Lá đơn xanh quanh năm",
-  flowering:"Ít thấy",
-  ecology:"Lọc không khí, giảm bụi, làm mát môi trường",
-  note:"Thường được cắt tỉa tạo hình để trang trí cảnh quan.",
-  image:"https://caycanhdep24h.com/wp-content/uploads/2023/03/cay-sanh-la-cay-gi.jpg"
+  name:"Cây cau cảnh",
+  scientific:"Areca lutescens",
+  family:"Arecaceae",
+  origin:"Madagascar",
+  year:2023,
+  height:"1–3 m",
+  leaf:"Lá dài, tán mềm",
+  flowering:"Quanh năm",
+  ecology:"Lọc khí độc, tăng độ ẩm không khí.",
+  note:"Mang lại sinh khí và may mắn.",
+  image:"file:///C:/Users/Admin/Pictures/z7429213988836_16d2c905f167d85b84082866c4173f32.jpg",
+  message:"🌴 Sinh trưởng bền bỉ, lan tỏa sức sống."
 },
 {
   id:4,
-  name:"Cây đuôi công đốm",
-  scientific:"Calathea makoyana",
-  family:"Họ dong riềng (Marantaceae)",
-  origin:"Brazil",
-  year:2024,
-  height:"40–60 cm",
-  leaf:"Lá hình bầu dục, có đốm và vân như đuôi công",
-  flowering:"Hiếm khi ra hoa",
-  ecology:"Cây cảnh nội thất, cải thiện mỹ quan và chất lượng không khí",
-  note:"Cây đuôi công đốm có lá rất đẹp với hoa văn đặc trưng, thường trồng ở nơi râm mát như dưới cổng, hành lang hoặc trong nhà.",
-  image:"https://mowgarden.com/wp-content/uploads/2022/08/duoicongdommowgarden.jpg"
+  name:"Cây râm bụt",
+  scientific:"Hibiscus rosa-sinensis",
+  family:"Malvaceae",
+  origin:"Châu Á nhiệt đới",
+  year:2023,
+  height:"1–4 m",
+  leaf:"Lá răng cưa, thân gỗ nhỏ",
+  flowering:"Quanh năm",
+  ecology:"Cây cảnh, hàng rào xanh.",
+  note:"Gần gũi với đời sống Việt Nam.",
+  image:"file:///C:/Users/Admin/Pictures/z7429285642538_2571d543633d1c172aedb8d251e3f64b.jpg",
+  message:"🌺 Đơn giản nhưng luôn rực rỡ."
 },
 {
   id:5,
-  name:"Cây lan ý",
-  scientific:"Spathiphyllum wallisii",
-  family:"Họ Ráy (Araceae)",
-  origin:"Trung và Nam Mỹ",
+  name:"Cây phượng",
+  scientific:"Delonix regia",
+  family:"Fabaceae",
+  origin:"Madagascar",
   year:2023,
-  height:"30–60 cm",
-  leaf:"Lá thuôn dài, xanh đậm, bóng",
-  flowering:"Quanh năm (nhiều nhất vào mùa hè)",
-  ecology:"Thanh lọc không khí, hấp thụ khí độc, tạo không gian xanh",
-  note:"Cây lan ý là cây cảnh phổ biến, hoa trắng tinh khiết, thích hợp trồng dưới cổng, hành lang hoặc trong phòng học vì chịu bóng tốt.",
-  image:"https://static-images.vnncdn.net/files/publish/2022/8/4/cach-trong-va-y-nghia-phong-thuy-it-nguoi-biet-cua-cay-lan-y-01b3d060089e4d20839cad5049cfb384.jpg"
+  height:"10–15 m",
+  leaf:"Lá kép nhỏ, tán rộng",
+  flowering:"Tháng 5 – 7",
+  ecology:"Tạo bóng mát, cải thiện vi khí hậu.",
+  note:"Gắn liền với tuổi học trò.",
+  image:"file:///C:/Users/Admin/Pictures/z7398832589968_2e2ae0e73bd2d5e7c4a2de3966622759.jpg",
+  message:"🔥 Rực cháy ký ức thanh xuân."
+},
+{
+  id:6,
+  name:"Cây xoài",
+  scientific:"Mangifera indica",
+  family:"Anacardiaceae",
+  origin:"Ấn Độ",
+  year:2023,
+  height:"10–20 m",
+  leaf:"Lá dài, thân gỗ lớn",
+  flowering:"Tháng 12 – 3",
+  ecology:"Cho quả, tạo bóng mát.",
+  note:"Biểu tượng của sự no đủ.",
+  image:"file:///C:/Users/Admin/Pictures/z7398832579062_0f6b2232581efcf5dcba21b3f1144210.jpg",
+  message:"🥭 Sự đủ đầy đến từ sự chăm sóc."
+},
+{
+  id:7,
+  name:"Cây hoa giấy",
+  scientific:"Bougainvillea spectabilis",
+  family:"Nyctaginaceae",
+  origin:"Nam Mỹ",
+  year:2023,
+  height:"2–10 m",
+  leaf:"Thân leo có gai, hoa nhiều màu",
+  flowering:"Quanh năm",
+  ecology:"Trang trí cổng, hàng rào.",
+  note:"Sức sống bền bỉ, chịu nắng tốt.",
+  image:"https://upload.wikimedia.org/wikipedia/commons/1/1a/Bougainvillea_glabra.jpg",
+  message:"🌸 Mạnh mẽ nhưng vẫn dịu dàng."
+},
+{
+  id:8,
+  name:"Cây bằng lăng",
+  scientific:"Lagerstroemia speciosa",
+  family:"Lythraceae",
+  origin:"Đông Nam Á",
+  year:2023,
+  height:"10–15 m",
+  leaf:"Lá to, thân gỗ",
+  flowering:"Tháng 5 – 8",
+  ecology:"Tạo cảnh quan, bóng mát.",
+  note:"Gắn với ký ức học trò.",
+  image:"https://upload.wikimedia.org/wikipedia/commons/0/0f/Lagerstroemia_speciosa_flowers.jpg",
+  message:"💜 Lưu giữ những mùa thương nhớ."
+},
+{
+  id:9,
+  name:"Cây kim tiền",
+  scientific:"Zamioculcas zamiifolia",
+  family:"Araceae",
+  origin:"Đông Phi",
+  year:2023,
+  height:"40–100 cm",
+  leaf:"Lá bóng, thân mập, rễ củ",
+  flowering:"Hiếm hoa",
+  ecology:"Trang trí nội thất, phong thủy.",
+  note:"Tượng trưng cho tài lộc và may mắn.",
+  image:"https://upload.wikimedia.org/wikipedia/commons/5/59/Zamioculcas_zamiifolia.jpg",
+  message:"💰 Gieo tài lộc, gặt thịnh vượng."
+},
+{
+  id:10,
+  name:"Cây cúc tần Ấn Độ",
+  scientific:"Vernonia elliptica",
+  family:"Asteraceae",
+  origin:"Ấn Độ",
+  year:2023,
+  height:"2–5 m",
+  leaf:"Lá nhỏ, thân leo rủ",
+  flowering:"Ít hoa",
+  ecology:"Che phủ, làm mát không gian.",
+  note:"Tạo mảng xanh mềm mại, thư giãn.",
+  image:"file:///C:/Users/Admin/Pictures/z7429285665936_1f9ca65cad191903088e895f77abbfbc.jpg",
+  message:"🌿 Xanh mát không gian – an yên tâm hồn."
 }
-
-
 ];
 
-const listDiv = document.getElementById("list");
-const info = document.getElementById("info");
-const search = document.getElementById("search");
+const listDiv=document.getElementById("list");
+const info=document.getElementById("info");
+const search=document.getElementById("search");
 
-/* ===== HIỂN THỊ THÔNG TIN CÂY ===== */
 function showInfo(tree){
   document.querySelectorAll(".tree").forEach(b=>b.classList.remove("active"));
   const btn=document.querySelector(`[data-id="${tree.id}"]`);
   if(btn) btn.classList.add("active");
 
-  info.innerHTML = `
+  info.innerHTML=`
     <img src="${tree.image}">
     <h2>${tree.name}</h2>
 
+    <h3>📌 Thông tin khoa học</h3>
     <div class="badge">🌱 Tên khoa học: ${tree.scientific}</div>
     <div class="badge">🧬 Họ: ${tree.family}</div>
     <div class="badge">🌍 Nguồn gốc: ${tree.origin}</div>
+
+    <h3>📏 Kích thước & sinh trưởng</h3>
     <div class="badge">📏 Chiều cao: ${tree.height}</div>
-    <div class="badge">🍃 Lá: ${tree.leaf}</div>
     <div class="badge">🌼 Mùa hoa: ${tree.flowering}</div>
     <div class="badge">📅 Năm trồng: ${tree.year}</div>
 
-    <h3>🌳 Giá trị sinh thái</h3>
+    <h3>🌿 Vai trò sinh thái</h3>
     <p>${tree.ecology}</p>
 
-    <h3>📝 Mô tả</h3>
+    <h3>🌳 Đặc điểm sinh học</h3>
+    <ul>
+      <li>🍃 Đặc điểm lá: ${tree.leaf}</li>
+      <li>🌼 Đặc điểm ra hoa: ${tree.flowering}</li>
+    </ul>
+
+    <h3>📝 Ý nghĩa</h3>
     <p>${tree.note}</p>
+
+    <h3>❤️ Thông điệp từ cây</h3>
+    <p style="background:#ecfdf5;border-left:6px solid #38a169;padding:12px;border-radius:12px;font-weight:600;">
+      ${tree.message}
+    </p>
   `;
 }
 
-/* ===== DANH SÁCH CÂY ===== */
 function render(data){
   listDiv.innerHTML="";
   data.forEach(t=>{
     const b=document.createElement("button");
     b.className="tree";
     b.dataset.id=t.id;
-    b.textContent=t.name;
+    b.textContent="🌿 "+t.name;
     b.onclick=()=>showInfo(t);
     listDiv.appendChild(b);
   });
 }
 render(trees);
 
-/* ===== TÌM KIẾM ===== */
 search.oninput=()=>{
   const q=search.value.toLowerCase();
   render(trees.filter(t=>t.name.toLowerCase().includes(q)));
 };
-
-/* ===== TỰ ĐỘNG MỞ CÂY KHI QUÉT QR ===== */
-const params = new URLSearchParams(window.location.search);
-const treeId = params.get("tree");
-
-if(treeId){
-  const tree = trees.find(t=>t.id==treeId);
-  if(tree){
-    showInfo(tree);
-    info.scrollIntoView({behavior:"smooth"});
-  }
-}
 </script>
 
 </body>
 </html>
-
