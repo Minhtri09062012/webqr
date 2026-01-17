@@ -96,9 +96,9 @@ h3{
 
 <script>
 const trees = [
+
 {
   id:1,
-
   name:"Lan ý – Huệ hòa bình",
   scientific:"Spathiphyllum wallisii",
   family:"Araceae (Họ Ráy)",
@@ -116,13 +116,24 @@ const trees = [
   propagation:"Nhân giống bằng cách tách bụi hoặc tách thân rễ.",
 
   ecology:"Hấp thụ formaldehyde, benzene, cải thiện chất lượng không khí trong phòng.",
-  care:"Ánh sáng gián tiếp, đất ẩm vừa, tránh nắng gắt, tưới 2–3 lần/tuần.",
-  disease:"Dễ bị thối rễ nếu úng nước, cháy lá khi thiếu ẩm.",
-  warning:"Nhựa chứa canxi oxalat, gây kích ứng, độc nhẹ với thú nuôi.",
 
-  image: "image/a.jpg",
+  care:{
+    light:"Ánh sáng gián tiếp, bán râm, tránh nắng gắt.",
+    water:"Tưới 2–3 lần/tuần, giữ đất ẩm vừa, không để úng.",
+    soil:"Đất tơi xốp, giàu mùn, thoát nước tốt.",
+    humidity:"Ưa ẩm cao, nên phun sương nếu phòng khô.",
+    fertilizer:"Bón phân loãng 1–2 lần/tháng.",
+    temperature:"18–30°C, không chịu lạnh dưới 10°C.",
+    pot:"Thay chậu 1–2 năm/lần, chậu vừa với bộ rễ."
+  },
+
+  disease:"Dễ bị thối rễ nếu úng nước, cháy lá khi thiếu ẩm hoặc gặp nắng gắt.",
+  warning:"Nhựa chứa canxi oxalat, gây kích ứng da, độc nhẹ với mèo và chó.",
+
+  image:"https://i.postimg.cc/2S41m0NM/z7409301869028-d5f74c9d031f3ec7b40a468cdde39f73.jpg",
   message:"🤍 Bình yên không đến từ sự hoàn hảo, mà từ sự cân bằng."
 },
+
 
 {
   id:2,
@@ -143,11 +154,19 @@ const trees = [
   propagation:"Tách bụi khi cây trưởng thành.",
 
   ecology:"Tăng độ ẩm không khí, tạo không gian thư giãn sinh học.",
-  care:"Ưa ẩm cao, ánh sáng tán xạ, đất tơi xốp, không chịu nắng gắt.",
+  care:{
+  light:"Ánh sáng tán xạ, tránh nắng trực tiếp, thích hợp đặt gần cửa sổ có rèm.",
+  water:"Giữ ẩm thường xuyên, tưới 2–3 lần/tuần, không để đất khô hoàn toàn.",
+  soil:"Đất tơi xốp, giàu mùn, thoát nước tốt (xơ dừa + trấu + đất mùn).",
+  humidity:"Cần độ ẩm không khí cao, nên phun sương hằng ngày.",
+  fertilizer:"Bón phân hữu cơ hoặc NPK loãng 1 lần/tháng.",
+  temperature:"18–28°C, tránh gió lạnh và điều hòa trực tiếp."
+},
+
   disease:"Dễ cháy mép lá nếu không khí khô, úng nước gây thối rễ.",
   warning:"Không độc, an toàn cho thú nuôi.",
 
-  image:"file:///C:/Users/Admin/Pictures/z7409301897086_e6c2de44eaa73c76c1be93d165f42c5c.jpg",
+  image:"https://i.postimg.cc/yNJjjJgm/z7409301897086-e6c2de44eaa73c76c1be93d165f42c5c.jpg",
   message:"🦚 Vẻ đẹp thật sự đến từ những chi tiết tinh tế."
 },
 
@@ -170,11 +189,19 @@ const trees = [
   propagation:"Nhân giống bằng tách chồi hoặc gieo hạt.",
 
   ecology:"Lọc không khí, tăng độ ẩm, tạo cảm giác mát mẻ.",
-  care:"Ưa sáng nhẹ, tưới đều, đất thoát nước tốt.",
+ care:{
+  light:"Ánh sáng nhẹ đến trung bình, chịu được bóng bán phần.",
+  water:"Tưới 2–3 lần/tuần, giữ đất ẩm nhưng không đọng nước.",
+  soil:"Đất giàu dinh dưỡng, thoát nước tốt, hơi chua nhẹ.",
+  fertilizer:"Bón phân 2 tháng/lần để lá xanh và thân khỏe.",
+  temperature:"20–30°C, chịu nóng tốt.",
+  maintenance:"Thường xuyên lau lá để cây quang hợp tốt hơn."
+},
+
   disease:"Có thể bị rệp sáp, vàng lá nếu thiếu dinh dưỡng.",
   warning:"Không độc, an toàn với môi trường sống.",
 
-  image:"file:///C:/Users/Admin/Pictures/z7429213988836_16d2c905f167d85b84082866c4173f32.jpg",
+  image:"https://i.postimg.cc/MKnRk0T2/z7429213988836-16d2c905f167d85b84082866c4173f32.jpg",
   message:"🌴 Khiêm nhường nhưng luôn bền bỉ vươn lên."
 },
 {
@@ -197,7 +224,7 @@ const trees = [
   life:"Cây lâu năm, sinh trưởng mạnh ở vùng khí hậu nhiệt đới, không chịu được sương giá.",
   
   habitat:"Ưa ánh sáng đầy đủ, nhiệt độ ấm, chịu nóng tốt; có thể chịu bóng râm nhẹ nhưng ra hoa kém hơn.",
-  image:"file:///C:/Users/Admin/Pictures/z7429285642538_2571d543633d1c172aedb8d251e3f64b.jpg",
+  image:"https://i.postimg.cc/HLjnKSNP/z7429285642538-2571d543633d1c172aedb8d251e3f64b.jpg",
   
   reproduction:"Nhân giống chủ yếu bằng phương pháp giâm cành; có thể gieo hạt nhưng ít dùng.",
   
@@ -253,7 +280,7 @@ const trees = [
   },
 
   disease:"Ít sâu bệnh nghiêm trọng, nhưng rễ mạnh có thể làm nứt vỉa hè.",
-  image:"file:///C:/Users/Admin/Pictures/z7398832589968_2e2ae0e73bd2d5e7c4a2de3966622759.jpg",
+  image:"https://i.postimg.cc/D0MCcqv6/z7398832589968-2e2ae0e73bd2d5e7c4a2de3966622759.jpg",
   
   message:"Phượng vĩ dạy ta trân trọng những khoảnh khắc tuổi trẻ – rực rỡ, ngắn ngủi và không bao giờ quay lại."
 },
@@ -293,7 +320,7 @@ const trees = [
   },
 
   disease:"Có thể bị ruồi đục quả, bệnh thán thư, phấn trắng.",
-  image:"file:///C:/Users/Admin/Pictures/z7398832579062_0f6b2232581efcf5dcba21b3f1144210.jpg",
+  image:"https://i.postimg.cc/CxVCpvQQ/z7398832579062-0f6b2232581efcf5dcba21b3f1144210.jpg",
   message:"Xoài nhắc ta rằng: yêu thương cần thời gian, như trái xanh thành ngọt, như người trưởng thành từ thử thách."
 },
 {
@@ -332,7 +359,7 @@ const trees = [
   },
 
   disease:"Rệp sáp, rệp vảy; chú ý gai nhọn.",
-  image:"file:///C:/Users/Admin/Pictures/z7398832579062_0f6b2232581efcf5dcba21b3f1144210.jpg",
+  image:"https://i.postimg.cc/ncSyrxpQ/z7429214099231-23e6eef6ae8bbfbe655f0d69150dc9e5.jpg",
   message:"Hoa giấy nhắc ta: vẻ đẹp không nằm ở sự mong manh, mà ở sức chịu đựng bền bỉ trước nắng mưa."
 },
 {
@@ -371,7 +398,7 @@ const trees = [
   },
 
   disease:"Rệp vảy, rệp sáp, nhện đỏ.",
-
+  image:" https://i.postimg.cc/NM4nH4sv/z7436380605268-28e1889676ab52dc420cfbe595e4a447.jpg",
   message:"Huyết dụ nhắc ta rằng: cuộc sống cần sắc màu để luôn tươi mới và đầy năng lượng."
 },
 {
@@ -410,7 +437,7 @@ const trees = [
   },
 
   disease:"Ít sâu bệnh, có thể bị thối rễ nếu tưới quá nhiều.",
-
+  image:"https://i.postimg.cc/prktPvhq/z7434257489563-d8268e7c5cab3369497d3b7490f91e7e.jpg",
   message:"Kim tiền dạy ta rằng: giàu có thật sự đến từ sự kiên nhẫn và khả năng tích lũy bền bỉ."
 },
 {
@@ -449,7 +476,7 @@ const trees = [
   },
 
   disease:"Ít sâu bệnh nghiêm trọng, đôi khi có sâu ăn lá hoặc bệnh nấm khi ẩm kéo dài.",
-  image:"file:///C:/Users/Admin/Pictures/z7429285665936_1f9ca65cad191903088e895f77abbfbc.jpg",
+  image:"https://i.postimg.cc/Kc7G9SY6/z7429285665936-1f9ca65cad191903088e895f77abbfbc.jpg",
   message:"Cúc tần Ấn Độ nhắc ta rằng: bình yên không đến vội, mà lớn lên từ sự kiên trì và bền bỉ."
 }
 
