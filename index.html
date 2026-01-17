@@ -245,7 +245,7 @@ const trees = [
   message:"Râm bụt nhắc ta rằng: tình yêu cũng như hoa, chỉ nở rực rỡ khi được đặt dưới ánh sáng và được chăm sóc bằng sự kiên nhẫn."
 },
 {
-  
+  id:5,
   name:"Phượng vĩ – Tuổi học trò rực lửa",
   scientific:"Delonix regia",
   family:"Fabaceae (Họ Đậu)",
@@ -398,7 +398,7 @@ const trees = [
   },
 
   disease:"Rệp vảy, rệp sáp, nhện đỏ.",
-  image:" https://i.postimg.cc/NM4nH4sv/z7436380605268-28e1889676ab52dc420cfbe595e4a447.jpg",
+  image:"https://i.postimg.cc/NM4nH4sv/z7436380605268-28e1889676ab52dc420cfbe595e4a447.jpg",
   message:"Huyết dụ nhắc ta rằng: cuộc sống cần sắc màu để luôn tươi mới và đầy năng lượng."
 },
 {
@@ -558,9 +558,23 @@ function render(data){
 render(trees);
 
 search.oninput=()=>{
-  const q=search.value.toLowerCase();
-  render(trees.filter(t=>t.name.toLowerCase().includes(q)));
+  const q = search.value.toLowerCase();
+  render(trees.filter(t => 
+    t.name.toLowerCase().includes(q) || 
+    t.scientific.toLowerCase().includes(q)
+  ));
 };
+
+// ===== TỰ ĐỘNG HIỂN THỊ CÂY KHI MỞ LINK QR =====
+const params = new URLSearchParams(window.location.search);
+const treeId = params.get("id");
+
+if (treeId) {
+  const tree = trees.find(t => t.id == treeId);
+  if (tree) {
+    showInfo(tree);
+  }
+}
 </script>
 
 </body>
