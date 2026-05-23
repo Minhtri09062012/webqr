@@ -1,584 +1,766 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌿 Thư viện cây xanh thông minh</title>
+
+<title>Học Bạ Điện Tử</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
 body{
-  margin:0;
-  font-family:Segoe UI, Arial, sans-serif;
-  background:#f0fff4;
+
+    color:white;
+
+    overflow-x:hidden;
+
 }
-header{
-  background:linear-gradient(90deg,#2f855a,#38a169);
-  color:white;
-  padding:18px;
-  text-align:center;
+
+/* BACKGROUND */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background-image:
+
+    linear-gradient(
+    rgba(15,23,42,0.25),
+    rgba(15,23,42,0.35)
+    ),
+
+    url("https://stingworld.vn/wp-content/uploads/anh-phong-canh-anime-cho-may-tinh-desktop-macbook-9.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    filter:brightness(1.05);
+
+    z-index:-1;
+
 }
-#layout{
-  display:grid;
-  grid-template-columns:280px 1fr;
-  gap:16px;
-  padding:16px;
+
+/* SIDEBAR */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:260px;
+    height:100vh;
+
+    background:
+    rgba(15,23,42,0.12);
+
+    border-right:
+    1px solid rgba(255,255,255,0.06);
+
+    padding:25px;
+
+    backdrop-filter:blur(2px);
+
 }
-aside, main{
-  background:white;
-  border-radius:14px;
-  padding:14px;
-  box-shadow:0 6px 15px rgba(0,0,0,.1);
+
+/* LOGO */
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
 }
-input{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid #ccc;
+
+.logo h1{
+
+    color:#38bdf8;
+
+    font-size:32px;
+
+    letter-spacing:2px;
+
+    text-shadow:
+    0 0 15px rgba(56,189,248,0.6);
+
 }
-button.tree{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  margin-bottom:6px;
-  cursor:pointer;
-  background:#ecfeff;
-  text-align:left;
+
+.logo p{
+
+    color:#ffffff;
+
+    margin-top:5px;
+
 }
-button.tree:hover,
-button.tree.active{
-  background:#38a169;
-  color:white;
+
+/* BUTTON */
+
+.sidebar button{
+
+    width:100%;
+
+    margin-bottom:15px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-size:16px;
+
+    backdrop-filter:blur(3px);
+
 }
-img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:12px;
+
+.sidebar button:hover{
+
+    background:
+    rgba(56,189,248,0.85);
+
+    color:black;
+
+    transform:translateX(5px);
+
 }
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:14px;
-  font-size:13px;
-  margin:4px;
-  background:#ecfdf5;
-  color:#047857;
+
+/* MAIN */
+
+.main{
+
+    margin-left:260px;
+
+    padding:30px;
+
 }
-h3{
-  margin-top:16px;
-  border-left:5px solid #38a169;
-  padding-left:8px;
-  color:#065f46;
+
+/* TOPBAR */
+
+.topbar{
+
+    background:
+    rgba(15,23,42,0.10);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    backdrop-filter:blur(2px);
+
 }
-@media(max-width:768px){
-  #layout{grid-template-columns:1fr}
+
+.topbar h2{
+
+    font-size:34px;
+
 }
+
+.topbar p{
+
+    color:#ffffff;
+
+    margin-top:5px;
+
+}
+
+/* CARD */
+
+.card{
+
+    background:
+    rgba(15,23,42,0.10);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    backdrop-filter:blur(2px);
+
+    transition:0.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 30px rgba(56,189,248,0.25);
+
+}
+
+/* SECTION */
+
+.section{
+
+    display:none;
+
+}
+
+/* PROFILE */
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+}
+
+/* AVATAR */
+
+.avatar{
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    border:5px solid #38bdf8;
+
+    object-fit:cover;
+
+    box-shadow:
+    0 0 25px rgba(56,189,248,0.5);
+
+}
+
+/* INFO */
+
+.info{
+
+    flex:1;
+
+}
+
+.info p{
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+    color:#ffffff;
+
+}
+
+/* TABLE */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+}
+
+th{
+
+    background:
+    rgba(14,165,233,0.85);
+
+    color:white;
+
+}
+
+th,td{
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+td{
+
+    background:
+    rgba(255,255,255,0.03);
+
+}
+
+tr:hover td{
+
+    background:
+    rgba(56,189,248,0.15);
+
+}
+
+/* TITLE */
+
+.card h2{
+
+    margin-bottom:20px;
+
+    color:#7dd3fc;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.sidebar{
+
+    position:relative;
+
+    width:100%;
+    height:auto;
+
+}
+
+.main{
+
+    margin-left:0;
+
+}
+
+.topbar{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:10px;
+
+}
+
+.profile{
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+.avatar{
+
+    width:160px;
+    height:160px;
+
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<header>
-  <h2>🌿 THƯ VIỆN CÂY XANH THÔNG MINH</h2>
-  <p>Mỗi cây – Một tri thức khoa học – Một thông điệp sống xanh</p>
-</header>
+<!-- SIDEBAR -->
 
-<div id="layout">
-  <aside>
-    <input id="search" placeholder="🔍 Tìm kiếm cây...">
-    <div id="list"></div>
-  </aside>
-  <main id="info">
-    <p>🌱 Chọn một cây để xem thông tin chi tiết.</p>
-  </main>
+<div class="sidebar">
+
+    <div class="logo">
+
+        <h1>HỌC BẠ</h1>
+
+        <p>2025 - 2026</p>
+
+    </div>
+
+    <button onclick="showSection('profile')">
+        👤 Hồ sơ
+    </button>
+
+    <button onclick="showSection('study')">
+        📚 Học tập
+    </button>
+
+    <button onclick="showSection('experience')">
+        🚀 Trải nghiệm
+    </button>
+
+    <button onclick="showSection('awards')">
+        🏆 Thành tích
+    </button>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h2>Hoàng Minh Trí</h2>
+
+            <p>Học bạ điện tử học sinh</p>
+
+        </div>
+
+        <div>
+
+            <h3>8A2</h3>
+
+        </div>
+
+    </div>
+
+    <!-- PROFILE -->
+
+    <div class="section" id="profile">
+
+        <div class="card">
+
+            <div class="profile">
+
+                <img
+                src="https://cdn.phototourl.com/free/2026-05-23-ef521bf9-ddc8-4eb9-971a-a0c89be644a5.jpg"
+                class="avatar"
+                >
+
+                <div class="info">
+
+                    <p><b>Họ tên:</b> Hoàng Minh Trí</p>
+
+                    <p><b>Mã học sinh:</b> FBG20023</p>
+
+                    <p><b>Lớp:</b> 8A2</p>
+
+                    <p><b>Ngày sinh:</b> 06/09/2012</p>
+
+                    <p><b>Trường:</b> FPT Bắc Giang</p>
+
+                    <p><b>Năm học:</b> 2025 - 2026</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- HỌC TẬP -->
+
+    <div class="section" id="study">
+
+        <div class="card">
+
+            <h2>
+                📚 Bảng Điểm Học Tập
+            </h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Môn</th>
+                    <th>HK1</th>
+                    <th>HK2</th>
+                    <th>Cả năm</th>
+
+                </tr>
+
+                <tr>
+                    <td>Công nghệ</td>
+                    <td>9.4</td>
+                    <td>9.2</td>
+                    <td>9.3</td>
+                </tr>
+
+                <tr>
+                    <td>GDCD</td>
+                    <td>9.1</td>
+                    <td>8.5</td>
+                    <td>8.7</td>
+                </tr>
+
+                <tr>
+                    <td>KHTN</td>
+                    <td>8.3</td>
+                    <td>7.8</td>
+                    <td>8.0</td>
+                </tr>
+
+                <tr>
+                    <td>Lịch sử & Địa lí</td>
+                    <td>9.0</td>
+                    <td>8.7</td>
+                    <td>8.8</td>
+                </tr>
+
+                <tr>
+                    <td>Ngoại ngữ</td>
+                    <td>8.0</td>
+                    <td>8.5</td>
+                    <td>8.3</td>
+                </tr>
+
+                <tr>
+                    <td>Ngữ văn</td>
+                    <td>8.5</td>
+                    <td>7.9</td>
+                    <td>8.1</td>
+                </tr>
+
+                <tr>
+                    <td>Tin học</td>
+                    <td>9.7</td>
+                    <td>9.4</td>
+                    <td>9.5</td>
+                </tr>
+
+                <tr>
+                    <td>Toán</td>
+                    <td>9.0</td>
+                    <td>7.9</td>
+                    <td>8.3</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- HẠNH KIỂM -->
+
+        <div class="card">
+
+            <h2>
+                ⭐ Kết Quả Năm Học
+            </h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Giai đoạn</th>
+                    <th>Rèn luyện</th>
+                    <th>Học tập</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>HK1</td>
+                    <td>Tốt</td>
+                    <td>Tốt</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>HK2</td>
+                    <td>Tốt</td>
+                    <td>Khá</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Cả năm</td>
+                    <td>Tốt</td>
+                    <td>Tốt</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- TRẢI NGHIỆM -->
+
+    <div class="section" id="experience">
+
+        <div class="card">
+
+            <h2>
+                🚀 Bảng Điểm Trải Nghiệm
+            </h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Hoạt động</th>
+                    <th>Nhóm</th>
+                    <th>Kết quả</th>
+
+                </tr>
+
+                <tr>
+                    <td>Oxford English</td>
+                    <td>EN-GLOBAL</td>
+                    <td>B</td>
+                </tr>
+
+                <tr>
+                    <td>Supplementary English</td>
+                    <td>EN-GLOBAL</td>
+                    <td>A</td>
+                </tr>
+
+                <tr>
+                    <td>Vovinam</td>
+                    <td>PDP</td>
+                    <td>H</td>
+                </tr>
+
+                <tr>
+                    <td>Coding</td>
+                    <td>Smart</td>
+                    <td>A</td>
+                </tr>
+
+                <tr>
+                    <td>Robotics</td>
+                    <td>Smart</td>
+                    <td>B</td>
+                </tr>
+
+                <tr>
+                    <td>STEM-AI</td>
+                    <td>Smart</td>
+                    <td>A</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- THÀNH TÍCH -->
+
+    <div class="section" id="awards">
+
+        <div class="card">
+
+            <h2>
+                🏆 Giải Thưởng
+            </h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Cuộc thi</th>
+                    <th>Cấp</th>
+                    <th>Kết quả</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>HKICO</td>
+                    <td>Quốc gia</td>
+                    <td>🥉 Ba / Đồng</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>STEMPETITION</td>
+                    <td>FPT School</td>
+                    <td>🥈 Nhì / Bạc</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>FAnRoC</td>
+                    <td>FPT School</td>
+                    <td>🥉 Ba / Đồng</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>ASMO</td>
+                    <td>Quốc gia</td>
+                    <td>🎖 Khuyến khích</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </div>
 
 <script>
-const trees = [
 
-{
-  id:1,
-  name:"Lan ý – Huệ hòa bình",
-  scientific:"Spathiphyllum wallisii",
-  family:"Araceae (Họ Ráy)",
-  origin:"Nhiệt đới Trung và Nam Mỹ",
-  year:2023,
+function showSection(id){
 
-  morphology:"Cây thân thảo, thân rễ ngắn, mọc thành bụi, dáng gọn gàng.",
-  height:"30 – 90 cm",
+    let sections =
+    document.querySelectorAll(".section");
 
-  leaf:"Lá thuôn dài, xanh đậm, bóng, cuống có bẹ ôm thân.",
-  flower:"Hoa dạng mo, mo trắng hình chiếc thuyền, nhị màu vàng nhạt.",
-  fruit:"Quả mọng nhỏ, rất hiếm gặp trong trồng cảnh.",
+    sections.forEach(section=>{
 
-  biology:"Sinh trưởng chậm, ưa môi trường ổn định, nhiệt độ 18–30°C.",
-  propagation:"Nhân giống bằng cách tách bụi hoặc tách thân rễ.",
+        section.style.display = "none";
 
-  ecology:"Hấp thụ formaldehyde, benzene, cải thiện chất lượng không khí trong phòng.",
+    });
 
-  care:{
-    light:"Ánh sáng gián tiếp, bán râm, tránh nắng gắt.",
-    water:"Tưới 2–3 lần/tuần, giữ đất ẩm vừa, không để úng.",
-    soil:"Đất tơi xốp, giàu mùn, thoát nước tốt.",
-    humidity:"Ưa ẩm cao, nên phun sương nếu phòng khô.",
-    fertilizer:"Bón phân loãng 1–2 lần/tháng.",
-    temperature:"18–30°C, không chịu lạnh dưới 10°C.",
-    pot:"Thay chậu 1–2 năm/lần, chậu vừa với bộ rễ."
-  },
-
-  disease:"Dễ bị thối rễ nếu úng nước, cháy lá khi thiếu ẩm hoặc gặp nắng gắt.",
-  warning:"Nhựa chứa canxi oxalat, gây kích ứng da, độc nhẹ với mèo và chó.",
-
-  image:"https://i.postimg.cc/2S41m0NM/z7409301869028-d5f74c9d031f3ec7b40a468cdde39f73.jpg",
-  message:"🤍 Bình yên không đến từ sự hoàn hảo, mà từ sự cân bằng."
-},
-
-
-{
-  id:2,
-  name:"Đuôi công đốm – Nghệ thuật của thiên nhiên",
-  scientific:"Calathea makoyana (Goeppertia makoyana)",
-  family:"Marantaceae",
-  origin:"Rừng mưa nhiệt đới Nam Mỹ",
-  year:2023,
-
-  morphology:"Cây thân thảo, mọc bụi thấp, thân ngắn, lá vươn trực tiếp từ gốc.",
-  height:"30 – 40 cm",
-
-  leaf:"Lá bầu dục lớn, nền xanh nhạt, đốm xanh đậm như đuôi công, mặt dưới tím.",
-  flower:"Hoa nhỏ, trắng, ít gặp trong điều kiện trồng nội thất.",
-  fruit:"Rất hiếm hình thành quả.",
-
-  biology:"Lá cụp lại vào ban đêm, mở ra ban ngày (hiện tượng vận động sinh học).",
-  propagation:"Tách bụi khi cây trưởng thành.",
-
-  ecology:"Tăng độ ẩm không khí, tạo không gian thư giãn sinh học.",
-  care:{
-  light:"Ánh sáng tán xạ, tránh nắng trực tiếp, thích hợp đặt gần cửa sổ có rèm.",
-  water:"Giữ ẩm thường xuyên, tưới 2–3 lần/tuần, không để đất khô hoàn toàn.",
-  soil:"Đất tơi xốp, giàu mùn, thoát nước tốt (xơ dừa + trấu + đất mùn).",
-  humidity:"Cần độ ẩm không khí cao, nên phun sương hằng ngày.",
-  fertilizer:"Bón phân hữu cơ hoặc NPK loãng 1 lần/tháng.",
-  temperature:"18–28°C, tránh gió lạnh và điều hòa trực tiếp."
-},
-
-  disease:"Dễ cháy mép lá nếu không khí khô, úng nước gây thối rễ.",
-  warning:"Không độc, an toàn cho thú nuôi.",
-
-  image:"https://i.postimg.cc/yNJjjJgm/z7409301897086-e6c2de44eaa73c76c1be93d165f42c5c.jpg",
-  message:"🦚 Vẻ đẹp thật sự đến từ những chi tiết tinh tế."
-},
-
-{
-  id:3,
-  name:"Cau cảnh – Dáng khiêm nhường",
-  scientific:"Areca lutescens (Dypsis lutescens)",
-  family:"Arecaceae (Họ Cau)",
-  origin:"Madagascar",
-  year:2023,
-
-  morphology:"Cây thân cột, mọc thành bụi, thân mảnh, nhiều đốt rõ.",
-  height:"0.7 – 2 m",
-
-  leaf:"Lá kép lông chim, dài, mềm, cong rủ tự nhiên.",
-  flower:"Hoa nhỏ màu vàng, mọc thành chùm ở nách lá.",
-  fruit:"Quả nhỏ hình trứng, chuyển vàng khi chín.",
-
-  biology:"Sinh trưởng trung bình, tuổi thọ 10–20 năm.",
-  propagation:"Nhân giống bằng tách chồi hoặc gieo hạt.",
-
-  ecology:"Lọc không khí, tăng độ ẩm, tạo cảm giác mát mẻ.",
- care:{
-  light:"Ánh sáng nhẹ đến trung bình, chịu được bóng bán phần.",
-  water:"Tưới 2–3 lần/tuần, giữ đất ẩm nhưng không đọng nước.",
-  soil:"Đất giàu dinh dưỡng, thoát nước tốt, hơi chua nhẹ.",
-  fertilizer:"Bón phân 2 tháng/lần để lá xanh và thân khỏe.",
-  temperature:"20–30°C, chịu nóng tốt.",
-  maintenance:"Thường xuyên lau lá để cây quang hợp tốt hơn."
-},
-
-  disease:"Có thể bị rệp sáp, vàng lá nếu thiếu dinh dưỡng.",
-  warning:"Không độc, an toàn với môi trường sống.",
-
-  image:"https://i.postimg.cc/MKnRk0T2/z7429213988836-16d2c905f167d85b84082866c4173f32.jpg",
-  message:"🌴 Khiêm nhường nhưng luôn bền bỉ vươn lên."
-},
-{
-  id:4,
-  name:"Râm bụt – Lời tỏ tình của gió",
-  scientific:"Hibiscus rosa-sinensis",
-  family:"Malvaceae (Họ Bông)",
-  origin:"Tây Thái Bình Dương, phân bố rộng khắp vùng nhiệt đới và cận nhiệt đới",
-  year:2023,
-
-  morphology:"Cây bụi hoặc cây gỗ nhỏ, thân nhẵn, phân cành nhiều, hóa gỗ khi trưởng thành, sinh trưởng nhanh.",
-  height:"2 – 4 m",
-
-  leaf:"Lá đơn mọc so le, phiến lá hình bầu dục đến hình trứng, mép có răng cưa, màu xanh bóng, dài 7–12 cm.",
-  
-  flower:"Hoa to, đường kính 8–15 cm, 5 cánh, màu đỏ, hồng, vàng, cam hoặc trắng; cột nhị dài màu vàng nhô rõ ra ngoài; hoa nở rộ vào mùa hè và mùa thu.",
-  
-  fruit:"Quả nang hình trứng, ít khi hình thành trong điều kiện trồng cảnh; chứa nhiều hạt nhỏ có lông.",
-
-  life:"Cây lâu năm, sinh trưởng mạnh ở vùng khí hậu nhiệt đới, không chịu được sương giá.",
-  
-  habitat:"Ưa ánh sáng đầy đủ, nhiệt độ ấm, chịu nóng tốt; có thể chịu bóng râm nhẹ nhưng ra hoa kém hơn.",
-  image:"https://i.postimg.cc/HLjnKSNP/z7429285642538-2571d543633d1c172aedb8d251e3f64b.jpg",
-  
-  reproduction:"Nhân giống chủ yếu bằng phương pháp giâm cành; có thể gieo hạt nhưng ít dùng.",
-  
-  usage:"Cây cảnh trang trí sân vườn, công viên, hàng rào; có giá trị trong y học cổ truyền; là quốc hoa không chính thức của Haiti.",
-  
-  ecology:"Thu hút chim và bướm hút mật, góp phần duy trì đa dạng sinh học.",
-  
-  care:{
-    light:"Nắng đầy đủ để cây ra hoa nhiều.",
-    water:"Đất luôn ẩm vừa phải, không để khô hạn kéo dài, cũng không để úng.",
-    soil:"Đất tơi xốp, giàu mùn, thoát nước tốt.",
-    fertilizer:"Bón phân định kỳ trong mùa sinh trưởng để kích thích ra hoa.",
-    temperature:"Sinh trưởng tốt ở nhiệt độ 20–35°C."
-  },
-
-  disease:"Dễ gặp các bệnh như rỉ sắt, đốm lá, loét thân; sâu hại gồm rệp, rệp vảy, ruồi trắng, bọ cánh cứng Nhật Bản. Cây cao cần cọc chống đỡ khi nhiều gió.",
-
-  message:"Râm bụt nhắc ta rằng: tình yêu cũng như hoa, chỉ nở rực rỡ khi được đặt dưới ánh sáng và được chăm sóc bằng sự kiên nhẫn."
-},
-{
-  id:5,
-  name:"Phượng vĩ – Tuổi học trò rực lửa",
-  scientific:"Delonix regia",
-  family:"Fabaceae (Họ Đậu)",
-  origin:"Madagascar",
-  year:2023,
-
-  morphology:"Cây gỗ lớn, thân thẳng, tán xòe rất rộng, sinh trưởng nhanh.",
-  height:"10 – 20 m",
-
-  leaf:"Lá kép lông chim hai lần, gồm nhiều lá chét nhỏ, mềm, màu xanh nhạt.",
-  
-  flower:"Hoa lớn, 5 cánh, màu đỏ cam rực rỡ, một cánh có đốm trắng – vàng, nở rộ cuối xuân đầu hè.",
-  
-  fruit:"Quả đậu dài 30–60 cm, dẹt, khi chín chuyển nâu sẫm, chứa nhiều hạt cứng.",
-
-  life:"Cây lâu năm, ưa khí hậu nóng, không chịu được sương giá.",
-  
-  habitat:"Ưa nắng đầy đủ, chịu hạn tốt khi trưởng thành.",
-  
-  reproduction:"Nhân giống bằng hạt hoặc giâm cành; cây trồng từ hạt thường 7–10 năm mới ra hoa.",
-  
-  usage:"Cây bóng mát, cây cảnh đô thị, biểu tượng của tuổi học trò.",
-  
-  ecology:"Tạo bóng mát lớn, cải thiện vi khí hậu, thu hút côn trùng thụ phấn.",
-  
-  care:{
-    light:"Nắng hoàn toàn.",
-    water:"Tưới đều khi cây còn non, giảm nước khi cây trưởng thành.",
-    soil:"Đất sâu, thoát nước tốt.",
-    fertilizer:"Bón phân hữu cơ định kỳ.",
-    temperature:"Tốt nhất trên 20°C."
-  },
-
-  disease:"Ít sâu bệnh nghiêm trọng, nhưng rễ mạnh có thể làm nứt vỉa hè.",
-  image:"https://i.postimg.cc/D0MCcqv6/z7398832589968-2e2ae0e73bd2d5e7c4a2de3966622759.jpg",
-  
-  message:"Phượng vĩ dạy ta trân trọng những khoảnh khắc tuổi trẻ – rực rỡ, ngắn ngủi và không bao giờ quay lại."
-},
-{
-  id:6,
-  name:"Xoài – Gốc rễ của yêu thương",
-  scientific:"Mangifera indica",
-  family:"Anacardiaceae",
-  origin:"Nam Á (Ấn Độ – Myanmar)",
-  year:2023,
-
-  morphology:"Cây gỗ lớn, thân thẳng, tán rộng, nhựa có thể gây kích ứng.",
-  height:"10 – 40 m",
-
-  leaf:"Lá đơn mọc so le, hình mũi mác, lá non màu đỏ đồng, già xanh đậm.",
-  
-  flower:"Hoa nhỏ màu trắng kem – vàng nhạt, mọc thành chùm lớn, tỷ lệ đậu quả thấp.",
-  
-  fruit:"Quả hạch lớn, thịt dày, ngọt, mỗi quả có 1 hạt lớn.",
-
-  life:"Cây lâu năm, có thể sống trên 100 năm.",
-  
-  habitat:"Ưa khí hậu nóng, có mùa khô rõ rệt.",
-  
-  reproduction:"Nhân giống bằng hạt hoặc ghép cành để giữ giống.",
-  
-  usage:"Cây ăn quả giá trị kinh tế cao, cây bóng mát.",
-  
-  ecology:"Cung cấp thức ăn cho động vật, hoa cho côn trùng thụ phấn.",
-  
-  care:{
-    light:"Nắng đầy đủ.",
-    water:"Tưới khi cây non, cây lớn chịu hạn tốt.",
-    soil:"Đất sâu, thoát nước tốt.",
-    fertilizer:"Bón phân hữu cơ định kỳ.",
-    temperature:"Trên 18°C."
-  },
-
-  disease:"Có thể bị ruồi đục quả, bệnh thán thư, phấn trắng.",
-  image:"https://i.postimg.cc/CxVCpvQQ/z7398832579062-0f6b2232581efcf5dcba21b3f1144210.jpg",
-  message:"Xoài nhắc ta rằng: yêu thương cần thời gian, như trái xanh thành ngọt, như người trưởng thành từ thử thách."
-},
-
-{
-  id:7,
-  name:"Sử quân tử – Hương sắc đổi màu theo thời gian",
-  scientific:"Combretum indicum (Quisqualis indica)",
-  family:"Combretaceae",
-  origin:"Đông Nam Á và Ấn Độ",
-  year:2023,
-
-  morphology:"Cây dây leo thân gỗ, sinh trưởng khỏe, leo giàn hoặc bám tường.",
-  height:"6 – 12 m",
-
-  leaf:"Lá đơn, hình bầu dục, to, màu xanh đậm.",
-  
-  flower:"Hoa mọc thành chùm, lúc đầu màu trắng, sau chuyển hồng rồi đỏ, rất thơm.",
-  
-  fruit:"Quả hình thoi, có 5 cạnh, chứa một hạt.",
-
-  life:"Cây lâu năm, sinh trưởng mạnh.",
-  
-  habitat:"Ưa nắng, chịu hạn vừa.",
-  
-  reproduction:"Nhân giống bằng giâm cành hoặc chiết cành.",
-  
-  usage:"Trang trí cổng, giàn leo, tường rào, sân vườn.",
-  
-  ecology:"Thu hút ong bướm, tạo mảng xanh và hương thơm tự nhiên.",
-  
-  care:{
-    light:"Nắng nhiều.",
-    water:"Tưới vừa phải, không úng.",
-    soil:"Đất tơi xốp, thoát nước tốt.",
-    fertilizer:"Bón phân hữu cơ hoặc NPK định kỳ.",
-    temperature:"Trên 18°C."
-  },
-
-  disease:"Ít sâu bệnh, đôi khi bị rệp.",
-  image:"https://i.postimg.cc/GmSBKw20/z7429214099231-23e6eef6ae8bbfbe655f0d69150dc9e5.jpg",
-  message:"Sử quân tử dạy ta rằng: vẻ đẹp có thể thay đổi theo thời gian, nhưng hương thơm của giá trị thì luôn còn mãi."
-
-
-},
-{
-  id:8,
-  name:"Huyết dụ – Sắc màu của sức sống",
-  scientific:"Cordyline fruticosa",
-  family:"Asparagaceae",
-  origin:"Đông Nam Á – Polynesia",
-  year:2023,
-
-  morphology:"Cây bụi hoặc thân gỗ nhỏ, thân thẳng, ít phân cành.",
-  height:"1 – 4 m",
-
-  leaf:"Lá dài hình mũi mác, màu đỏ, tím hoặc xanh pha đỏ.",
-  
-  flower:"Hoa nhỏ màu trắng, hồng nhạt hoặc tím, không nổi bật.",
-  
-  fruit:"Quả mọng tròn, chín màu đỏ.",
-
-  life:"Cây lâu năm, sinh trưởng tốt ở vùng ấm.",
-  
-  habitat:"Ánh sáng mạnh đến bán râm.",
-  
-  reproduction:"Nhân giống bằng đoạn thân hoặc tách bụi.",
-  
-  usage:"Cây cảnh lá màu, có giá trị văn hóa tín ngưỡng.",
-  
-  ecology:"Quả là thức ăn cho chim.",
-  
-  care:{
-    light:"Bán râm đến nắng nhẹ.",
-    water:"Giữ đất ẩm đều.",
-    soil:"Đất tơi xốp, thoát nước tốt.",
-    fertilizer:"Bón nhẹ định kỳ.",
-    temperature:"18–30°C."
-  },
-
-  disease:"Rệp vảy, rệp sáp, nhện đỏ.",
-  image:"https://i.postimg.cc/NM4nH4sv/z7436380605268-28e1889676ab52dc420cfbe595e4a447.jpg",
-  message:"Huyết dụ nhắc ta rằng: cuộc sống cần sắc màu để luôn tươi mới và đầy năng lượng."
-},
-{
-    id:9,
-  name:"Kim tiền – Biểu tượng của tài lộc và bền bỉ",
-  scientific:"Zamioculcas zamiifolia",
-  family:"Araceae (Họ Ráy)",
-  origin:"Đông Phi (Kenya, Tanzania, Zanzibar)",
-  year:2023,
-
-  morphology:"Cây thân thảo lâu năm, có thân rễ phình to dạng củ, dự trữ nước và dinh dưỡng.",
-  height:"40 – 100 cm",
-
-  leaf:"Lá mọc thẳng từ gốc, dạng lá kép lông chim, cuống dày, lá chét bầu dục, dày, mọng nước, xanh đậm bóng.",
-  
-  flower:"Hoa hiếm gặp, dạng mo – trục hoa đặc trưng họ Ráy, màu kem nhạt, mọc thấp gần gốc.",
-  
-  fruit:"Hầu như không xuất hiện trong điều kiện trồng cảnh.",
-
-  life:"Cây sống lâu năm, chịu hạn cực tốt, sinh trưởng ổn định.",
-  
-  habitat:"Ánh sáng yếu đến trung bình, không chịu được lạnh kéo dài.",
-  
-  reproduction:"Nhân giống bằng tách thân rễ, giâm lá hoặc giâm cuống lá (chậm).",
-  
-  usage:"Cây cảnh nội thất, biểu tượng phong thủy về tiền tài và may mắn.",
-  
-  ecology:"Hấp thụ VOC như benzen, toluen, etylbenzen và xylen.",
-  
-  care:{
-    light:"Bóng râm đến ánh sáng gián tiếp.",
-    water:"Ít nước, để đất khô giữa các lần tưới.",
-    soil:"Đất thoát nước tốt.",
-    fertilizer:"Ít bón phân.",
-    temperature:"18–30°C."
-  },
-
-  disease:"Ít sâu bệnh, có thể bị thối rễ nếu tưới quá nhiều.",
-  image:"https://i.postimg.cc/prktPvhq/z7434257489563-d8268e7c5cab3369497d3b7490f91e7e.jpg",
-  message:"Kim tiền dạy ta rằng: giàu có thật sự đến từ sự kiên nhẫn và khả năng tích lũy bền bỉ."
-},
-{
-  id:10,
-  name:"Cúc tần Ấn Độ – Khoảng xanh bền vững theo năm tháng",
-  scientific:"Pluchea indica",
-  family:"Asteraceae (Họ Cúc)",
-  origin:"Nam Á và Đông Nam Á",
-  year:2023,
-
-  morphology:"Cây bụi hoặc cây gỗ nhỏ, phân cành nhiều, hóa gỗ ở gốc.",
-  height:"1 – 3 m",
-
-  leaf:"Lá đơn, hình bầu dục đến mũi mác, có mùi thơm nhẹ khi vò.",
-  
-  flower:"Hoa nhỏ, màu tím nhạt đến hồng, tụ thành cụm hoa đầu đặc trưng họ Cúc.",
-  
-  fruit:"Quả bế nhỏ, có lông giúp phát tán theo gió.",
-
-  life:"Cây lâu năm, sinh trưởng tốt ở vùng nóng ẩm, chịu mặn tốt.",
-  
-  habitat:"Ưa ánh sáng mạnh, thích hợp đất ven biển và đất nghèo dinh dưỡng.",
-  
-  reproduction:"Nhân giống bằng hạt hoặc giâm cành.",
-  
-  usage:"Cây hàng rào, chắn gió, cải tạo đất ven biển.",
-  
-  ecology:"Giữ đất, chống xói mòn, cung cấp thức ăn cho côn trùng.",
-  
-  care:{
-    light:"Nắng đầy đủ.",
-    water:"Chịu hạn tốt, vẫn sinh trưởng ở đất ẩm hoặc đất mặn.",
-    soil:"Đa dạng loại đất: đất thịt, đất cát, đất mặn.",
-    fertilizer:"Hầu như không cần nhiều phân.",
-    temperature:"Trên 20°C."
-  },
-
-  disease:"Ít sâu bệnh nghiêm trọng, đôi khi có sâu ăn lá hoặc bệnh nấm khi ẩm kéo dài.",
-  image:"https://i.postimg.cc/Kc7G9SY6/z7429285665936-1f9ca65cad191903088e895f77abbfbc.jpg",
-  message:"Cúc tần Ấn Độ nhắc ta rằng: bình yên không đến vội, mà lớn lên từ sự kiên trì và bền bỉ."
-}
-
-];
-
-const listDiv=document.getElementById("list");
-const info=document.getElementById("info");
-const search=document.getElementById("search");
-
-function showInfo(tree){
-  document.querySelectorAll(".tree").forEach(b=>b.classList.remove("active"));
-  const btn=document.querySelector(`[data-id="${tree.id}"]`);
-  if(btn) btn.classList.add("active");
-
- info.innerHTML = `
-  ${tree.image ? `<img src="${tree.image}" class="tree-img">` : ""}
-
-  <h2>${tree.name}</h2>
-
-  <h3>📌 Thông tin khoa học</h3>
-  <div class="badge">🌱 Tên khoa học: ${tree.scientific}</div>
-  <div class="badge">🧬 Họ: ${tree.family}</div>
-  <div class="badge">🌍 Nguồn gốc: ${tree.origin}</div>
-
-  <h3>📏 Kích thước & sinh trưởng</h3>
-  <div class="badge">📏 Chiều cao: ${tree.height}</div>
-  <div class="badge">📅 Năm trồng: ${tree.year}</div>
-
-  <h3>🌿 Vai trò sinh thái</h3>
-  <p>${tree.ecology || "Chưa có dữ liệu."}</p>
-
-  <h3>🌳 Đặc điểm sinh học</h3>
-  <ul>
-    <li>🍃 Lá: ${tree.leaf || "Chưa có dữ liệu."}</li>
-    <li>🌼 Hoa: ${tree.flower || "Chưa có dữ liệu."}</li>
-    <li>🍎 Quả: ${tree.fruit || "Chưa có dữ liệu."}</li>
-  </ul>
-
-  <h3>🪴 Chăm sóc & điều kiện sống</h3>
-  <ul class="care-list">
-    <li>☀️ Ánh sáng: ${tree.care?.light || "Chưa có dữ liệu."}</li>
-    <li>💧 Nước: ${tree.care?.water || "Chưa có dữ liệu."}</li>
-    <li>🌱 Đất: ${tree.care?.soil || "Chưa có dữ liệu."}</li>
-    <li>🌡️ Nhiệt độ: ${tree.care?.temperature || "Chưa có dữ liệu."}</li>
-  </ul>
-
-  <h3>⚠️ Bệnh & lưu ý</h3>
-  <p>${tree.disease || "Chưa có dữ liệu."}</p>
-  ${tree.warning ? `<p style="color:#c53030;font-weight:600;">⚠️ ${tree.warning}</p>` : ""}
-
-  <h3>❤️ Thông điệp từ cây</h3>
-  <p style="
-    background:#ecfdf5;
-    border-left:6px solid #38a169;
-    padding:12px;
-    border-radius:12px;
-    font-weight:600;
-  ">
-    ${tree.message}
-  </p>
-`;
-
-
+    document
+    .getElementById(id)
+    .style.display = "block";
 
 }
 
+showSection("profile");
 
-function render(data){
-  listDiv.innerHTML="";
-  data.forEach(t=>{
-    const b=document.createElement("button");
-    b.className="tree";
-    b.dataset.id=t.id;
-    b.textContent="🌿 "+t.name;
-    b.onclick=()=>showInfo(t);
-    listDiv.appendChild(b);
-  });
-}
-render(trees);
-
-search.oninput=()=>{
-  const q = search.value.toLowerCase();
-  render(trees.filter(t => 
-    t.name.toLowerCase().includes(q) || 
-    t.scientific.toLowerCase().includes(q)
-  ));
-};
-
-// ===== TỰ ĐỘNG HIỂN THỊ CÂY KHI MỞ LINK QR =====
-const params = new URLSearchParams(window.location.search);
-const treeId = params.get("id");
-
-if (treeId) {
-  const tree = trees.find(t => t.id == treeId);
-  if (tree) {
-    showInfo(tree);
-  }
-}
 </script>
 
 </body>
+
 </html>
